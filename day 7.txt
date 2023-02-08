@@ -1,0 +1,24 @@
+fetch("https://restcountries.com/v3.1/all")
+  .then(response => response.json())
+  .then(countries => {
+    // Get all the countries from the Asia continent / region using the Filter function
+    const asianCountries = countries.filter(country => country.region === "Asia");
+
+    // Get all the countries with a population of less than 2 lakhs using Filter function
+    const lowPopulationCountries = countries.filter(country => country.population < 200000);
+
+    // Print the following details name, capital, flag using forEach function
+    countries.forEach(country => {
+      console.log(`Name: ${country.name}`);
+      console.log(`Capital: ${country.capital}`);
+      console.log(`Flag: ${country.flag}`);
+    });
+
+    // Print the total population of countries using reduce function
+    const totalPopulation = countries.reduce((acc, country) => acc + country.population, 0);
+    console.log(`Total Population: ${totalPopulation}`);
+
+    // Print the country which uses US Dollars as currency
+    const usdCountry = countries.find(country => country.currencies.includes("USD"));
+    console.log(`Country using USD: ${usdCountry.name}`);
+  });
